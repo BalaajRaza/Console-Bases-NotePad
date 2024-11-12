@@ -196,6 +196,10 @@ class Dict{
     // Check recursively for every node
     return isBalanced(node->left) && isBalanced(node->right);
 }
+
+    void clear(){
+        root = NULL;
+    }
 };
 
 #endif

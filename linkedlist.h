@@ -16,7 +16,6 @@ class Text{
 public:
     Word* head;
     Word* tail;
-    int size;
 
     Text(){
         head = NULL;
@@ -58,7 +57,13 @@ public:
         Word *temp = head;
         while (temp)
         {
-            cout << temp->word << " ";
+            if(temp->word == "\n"){
+                cout<<endl;
+            }
+            else{
+                cout << temp->word << " ";
+            }
+
             temp = temp->next;
         }
     }
@@ -85,6 +90,7 @@ public:
     }
 
     string getLastWord(){
+        if(!tail) return "";
         return tail->word;
     }
 

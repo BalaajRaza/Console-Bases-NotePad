@@ -44,6 +44,16 @@ public:
     bool isEmpty(){
         return top == NULL;
     }
+
+    string getWord(){
+        string word = "";
+        Letter* curr = top;
+        while (curr){
+            word = curr->l + word;
+            curr = curr->next;
+        }
+        return word;
+    }
     
 };
 #endif
