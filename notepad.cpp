@@ -39,9 +39,6 @@ private:
                     temp[i] = c;
                     if (dict.find(dict.root, temp)){
                         suggestion = temp;
-                        if (suggestion.empty()) {
-                            suggestion = "No Suggestion Found for this misspelled word.";  // Suggest the original word if no suggestion was found
-                        }
                         return;
                     }
                 }
@@ -55,9 +52,6 @@ private:
             temp.erase(i, 1);
             if (dict.find(dict.root, temp)){
                 suggestion = temp;
-                if (suggestion.empty()) {
-                    suggestion = "No Suggestion Found for this misspelled word.";  // Suggest the original word if no suggestion was found
-                }
                 return;
             }
         }
@@ -69,9 +63,6 @@ private:
                 temp.insert(temp.begin()+i, c);
                 if (dict.find(dict.root, temp)){
                     suggestion = temp;
-                    if (suggestion.empty()) {
-                        suggestion = "No Suggestion Found for this misspelled word.";  // Suggest the original word if no suggestion was found
-                    }
                     return;
                 }
             }
@@ -84,9 +75,6 @@ private:
             
             if (dict.find(dict.root, temp)){
                 suggestion = temp;
-                if (suggestion.empty()) {
-                    suggestion = "No Suggestion Found for this misspelled word.";  // Suggest the original word if no suggestion was found
-                }
                 return;
             }
         }
@@ -113,7 +101,7 @@ public:
         while (true){
             letter = _getch();
             if(letter == 27){ // ESC to quit
-                cout<<"\nWant to Save your file before closing(y to save otherwise exit)?";
+                cout<<"\n\nWant to Save your file before closing(y to save otherwise exit)?";
                 char ch;
                 cin>>ch;
                 if(ch == 'y' || ch=='Y'){
@@ -146,7 +134,8 @@ public:
                     if(!dict.find(dict.root , currentWord)){
                         misspelled = currentWord;
                         generateSuggestion(misspelled);
-                        cout<<"\n\nYou misspelled the word \""<<suggestion<<"\" as \""<<misspelled<<"\". Want to accept suggestion(y to accept otherwise reject)?";
+                        if(suggestion!=""){
+                            cout<<"\n\nYou misspelled the word \""<<suggestion<<"\" as \""<<misspelled<<"\". Want to accept suggestion(y to accept otherwise reject)?";
                         char ch;
                         cin>>ch;
                         if (ch == 'y' || ch == 'Y'){
@@ -159,6 +148,13 @@ public:
                             misspelled = "";
                             suggestion = "";
                         }
+                        }
+                        else{
+                            misspelled = "";
+                            suggestion = "";
+                            text.insert(currentWord);
+                        }
+                    
                     }
                     else{
                         text.insert(currentWord);
